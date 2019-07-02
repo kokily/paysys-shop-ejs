@@ -57,9 +57,11 @@ app.use(function(req, res, next) {
 
 // Routes
 import home from './api/home';
+import admin from './api/admin';
 import auth from './api/auth';
 
 app.use('/', home);
+app.use('/admin', admin);
 app.use('/auth', auth);
 
 app.listen(process.env.PORT, () => console.log(`Express Server On ${process.env.PORT} PORT!!!`));

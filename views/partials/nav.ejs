@@ -54,10 +54,10 @@
         </div>
 
         <% if(isLogin) { %>
-          <div id="text-rotator-text" class="mt-4 text-rotator-text d-none">
-            <p><%= userData.username %> 님 접속 중...</p>
+          <div class="row align-items-center">
+            <a href="/auth/logout" class="btn btn-default btn-sm">로그아웃</a>
+            <h4 class="m-0 p-0 ml-2 text-align-center"><%= userData.username %> 님 접속 중...</h4>            
           </div>
-          <h3 id="text-rotator" class="d-inline-block text-rotator" style="min-height: 40px;"></h3>
         <% } else { %>
           <div class="col-9 col-sm-6 col-lg-3">
             <div id="header-top-second" class="clearfix">
@@ -69,32 +69,9 @@
                 </div>
 
                 <div class="btn-group">
-                  <button type="button" id="header-top-drop-2" class="btn dropdown-toggle btn-default btn-sm dropdown-toggle-no-caret"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                  >
+                  <a href="/auth/login" class="btn btn-default btn-sm">
                     <i class="fa fa-lock pr-2"></i> 로그인
-                  </button>
-                  <ul class="dropdown-menu dropdown-menu-right dropdown-animation"
-                    aria-labelledby="header-top-drop-2"
-                  >
-                    <li>
-                      <form action="/auth/login" method="post" class="login-form margin-clear">
-                        <div class="form-group has-feedback">
-                          <label class="control-label">이 름</label>
-                          <input type="text" class="form-control" placeholder="" />
-                          <i class="fa fa-user form-control-feedback"></i>
-                        </div>
-
-                        <div class="form-group has-feedback">
-                          <label class="control-label">비밀번호</label>
-                          <input type="password" class="form-control" placeholder="" />
-                          <i class="fa fa-lock form-control-feedback"></i>
-                        </div>
-
-                        <button type="submit" class="btn btn-gray btn-sm">로그인</button>
-                      </form>
-                    </li>
-                  </ul>
+                  </a>
                 </div>
 
               </div>

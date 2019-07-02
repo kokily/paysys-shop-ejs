@@ -44,6 +44,13 @@ passport.use(new LocalStrategy({
   });
 }));
 
+// 로그인 (GET) '/auth/login'
+api.get('/login', (req, res) => {
+  res.render('auth/login', {
+    title: '로그인 서비스'
+  });
+});
+
 // 로그인 처리 (POST) '/auth/login'
 api.post('/login', passport.authenticate('local', {
   failureRedirect: '/',
