@@ -1,0 +1,181 @@
+<div class="header-container">
+  
+  <div class="header-top dark">
+    <div class="container">
+      <div class="row">
+        <div class="col-3 col-sm-6 col-lg-9">
+          <div class="header-top-first clearfix">
+            <ul class="social-links circle small clearfix hidden-sm-down">
+              <li class="googleplus">
+                <a href="#"><i class="fa fa-google-plus"></i></a>
+              </li>
+              <li class="facebook">
+                <a href="#"><i class="fa fa-facebook"></i></a>
+              </li>
+              <li class="youtube">
+                <a href="#"><i class="fa fa-youtube-play"></i></a>
+              </li>
+            </ul>
+
+            <div class="social-links hidden-md-up circle small">
+              <div class="btn-group dropdown">
+                <button type="button" id="header-top-drop-1" class="btn dropdown-toggle dropdown-toggle--no-caret"
+                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                >
+                  <i class="fa fa-share-alt"></i>
+                </button>
+                <ul class="dropdown-menu dropdown-animation" aria-labelledby="header-top-drop-1">
+                  <li class="googleplus">
+                    <a href="#"><i class="fa fa-google-plus"></i></a>
+                  </li>
+                  <li class="facebook">
+                    <a href="#"><i class="fa fa-facebook"></i></a>
+                  </li>
+                  <li class="youtube">
+                    <a href="#"><i class="fa fa-youtube-play"></i></a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <ul class="list-inline hidden-md-down">
+              <li class="list-inline-item">
+                <i class="fa fa-map-marker pr-1 pl-2"></i>서울시 용산구 이태원로 22
+              </li>
+              <li class="list-inline-item">
+                <i class="fa fa-phone pr-1 pl-2"></i>02)748-0744
+              </li>
+              <li class="list-inline-item">
+                <i class="fa fa-envelope-o pr-1 pl-2"></i>mndconvention@nate.com
+              </li>
+            </ul>
+
+          </div>
+        </div>
+
+        <% if(isLogin) { %>
+          <div id="text-rotator-text" class="mt-4 text-rotator-text d-none">
+            <p><%= userData.username %> 님 접속 중...</p>
+          </div>
+          <h3 id="text-rotator" class="d-inline-block text-rotator" style="min-height: 40px;"></h3>
+        <% } else { %>
+          <div class="col-9 col-sm-6 col-lg-3">
+            <div id="header-top-second" class="clearfix">
+              <div class="header-top-dropdown text-right">
+                <div class="btn-group">
+                  <a href="/auth/register" class="btn btn-default btn-sm">
+                    <i class="fa fa-user pr-2"></i> 사원등록
+                  </a>
+                </div>
+
+                <div class="btn-group">
+                  <button type="button" id="header-top-drop-2" class="btn dropdown-toggle btn-default btn-sm dropdown-toggle-no-caret"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                  >
+                    <i class="fa fa-lock pr-2"></i> 로그인
+                  </button>
+                  <ul class="dropdown-menu dropdown-menu-right dropdown-animation"
+                    aria-labelledby="header-top-drop-2"
+                  >
+                    <li>
+                      <form action="/auth/login" method="post" class="login-form margin-clear">
+                        <div class="form-group has-feedback">
+                          <label class="control-label">이 름</label>
+                          <input type="text" class="form-control" placeholder="" />
+                          <i class="fa fa-user form-control-feedback"></i>
+                        </div>
+
+                        <div class="form-group has-feedback">
+                          <label class="control-label">비밀번호</label>
+                          <input type="password" class="form-control" placeholder="" />
+                          <i class="fa fa-lock form-control-feedback"></i>
+                        </div>
+
+                        <button type="submit" class="btn btn-gray btn-sm">로그인</button>
+                      </form>
+                    </li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        <% } %>
+
+      </div>
+    </div>
+  </div>
+
+  <header class="header dark fixed fixed-desktop clearfix">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-auto hidden-md-down">
+          <div class="header-first clearfix">
+            <div id="logo" class="logo">
+              <a href="/">
+                <img src="/assets/images/logo.png" alt="" />
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-8 ml-auto">
+          <div class="header-second clearfix">
+            <div class="main-navigation main-navigation--mega-menu animated">
+              <nav class="navbar navbar-expand-lg navbar-light p-0">
+                <div class="navbar-brand clearfix hidden-lg-up">
+                  <div id="logo-mobile" class="logo">
+                    <a href="/">
+                      <img id="logo-img-mobile" src="/assets/images/logo.png" alt="" />
+                    </a>
+                  </div>
+                </div>
+
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse-1"
+                  aria-controls="navbar-collapse-1" aria-expanded="false" aria-label="Toggle navigation"
+                >
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbar-collapse-1">
+                  <ul class="navbar-nav ml-xl-auto">
+
+                    <li class="nav-item dropdown">
+                      <a href="#" class="nav-link dropdown-toggle" id="first-dropdown" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false"
+                      >
+                        전표입력
+                      </a>
+
+                      <ul class="dropdown-menu" aria-labelledby="first-dropdown">
+                        <li><a href="#">현역 단가표</a></li>
+                        <li><a href="#">예비역 단가표</a></li>
+                        <li><a href="#">일반 단가표</a></li>
+                      </ul>
+                    </li>
+
+                    <li class="nav-item">
+                      <a href="#" class="nav-link">전표확인</a>
+                    </li>
+
+                    <li class="nav-item">
+                      <a href="#" class="nav-link">개별전표</a>
+                    </li>
+
+                    <li class="nav-item">
+                      <a href="#" class="nav-link">프론트</a>
+                    </li>
+
+                  </ul>
+                </div>
+
+              </nav>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+</div>
