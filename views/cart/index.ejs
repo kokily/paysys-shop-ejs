@@ -158,8 +158,10 @@
 		});
 
 		$('#trans').click(function () {
-			var msg = '전표가 전송되었습니다. 프론트 확인 요망'
-			socket.emit("trans", msg);
+			if (confirm('전표를 전송하시겠습니까??')) {
+				var msg = '전표가 전송되었습니다. 프론트 확인 요망'
+				socket.emit("trans", msg);
+			}
 		});
 	});
 </script>

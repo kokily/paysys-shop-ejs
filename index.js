@@ -61,11 +61,13 @@ import admin from './api/admin';
 import auth from './api/auth';
 import cart from './api/cart';
 import products from './api/products';
+import checkout from './api/checkout';
 
 app.use('/', home);
 app.use('/admin', admin);
 app.use('/auth', auth);
 app.use('/cart', cart);
 app.use('/products', products);
+app.use('/checkout', checkout);
 
 app.listen(process.env.PORT, () => console.log(`Express Server On ${process.env.PORT} PORT!!!`));
