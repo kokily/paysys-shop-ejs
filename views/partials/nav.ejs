@@ -117,32 +117,34 @@
                 <div class="collapse navbar-collapse" id="navbar-collapse-1">
                   <ul class="navbar-nav ml-xl-auto">
 
-                    <li class="nav-item dropdown">
-                      <a href="#" class="nav-link dropdown-toggle" id="first-dropdown" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false"
-                      >
-                        전표입력
-                      </a>
+                    <% if (isLogin) { %>
+                      <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" id="first-dropdown" data-toggle="dropdown"
+                          aria-haspopup="true" aria-expanded="false"
+                        >
+                          전표입력
+                        </a>
 
-                      <ul class="dropdown-menu" aria-labelledby="first-dropdown">
-                        <li><a href="#">현역 단가표</a></li>
-                        <li><a href="#">예비역 단가표</a></li>
-                        <li><a href="#">일반 단가표</a></li>
-                      </ul>
-                    </li>
+                        <ul class="dropdown-menu" aria-labelledby="first-dropdown">
+                          <li><a href="/soldier">현역 단가표</a></li>
+                          <li><a href="/reserve">예비역 단가표</a></li>
+                          <li><a href="/general">일반 단가표</a></li>
+                        </ul>
+                      </li>
 
-                    <li class="nav-item">
-                      <a href="#" class="nav-link">전표확인</a>
-                    </li>
+                      <li class="nav-item">
+                        <a href="/cart" class="nav-link">전표확인</a>
+                      </li>
 
-                    <li class="nav-item">
-                      <a href="#" class="nav-link">개별전표</a>
-                    </li>
-
-                    <li class="nav-item">
-                      <a href="#" class="nav-link">프론트</a>
-                    </li>
-
+                      <li class="nav-item">
+                        <a href="#" class="nav-link">개별전표</a>
+                      </li>
+                    <% } %>
+                    
+                      <li class="nav-item">
+                        <a href="/front" class="nav-link">프론트</a>
+                      </li>
+                    
                   </ul>
                 </div>
 

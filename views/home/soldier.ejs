@@ -1,0 +1,77 @@
+<% include ../partials/header %>
+
+<div id="page-start"></div>
+
+<section class="main-container" style="margin-top: 60px;">
+	<h1 class="page-title text-center">현역 메뉴표</h1>
+
+	<div class="separator-2"></div>
+
+	<div class="container">
+		<div class="row grid-space-10">
+
+			<% products.forEach((product) => { %>
+				<div class="col-md-6 col-lg-3"
+					onclick="location.href='/soldier/menu/<%= product %>'"
+					style="cursor: pointer;"
+				>
+					<%
+						var select;
+
+						switch (product) {
+							case '식사메뉴':
+								select = '식사메뉴';
+								break;
+							case '레드와인':
+								select = '레드와인';
+								break;
+							case '화이트와인':
+								select = '화이트와인';
+								break;
+							case '샴페인':
+								select = '샴페인';
+								break;
+							case '양주':
+								select = '양주';
+								break;
+							case '민속주':
+								select = '민속주';
+								break;
+							case '고량주':
+								select = '고량주';
+								break;
+							case '기타주류':
+								select = '기타주류';
+								break;
+							case '반입료':
+								select = '반입료';
+								break;
+							case '대관료':
+								select = '대관료';
+								break;
+							case '칵테일':
+								select = '칵테일';
+								break;
+							case '부대비용':
+								select = '부대비용';
+								break;
+							default:
+								select = '뭔데??';
+								break;
+						}
+					%>
+					<div class="image-box team-member style-2 bordered dark-bg mb-20 text-center default-hovered">
+						<div class="body">
+							<h4 class="margin-clear">
+								<%= select %>
+							</h4>
+						</div>
+					</div>
+				</div>
+			<% }) %>
+
+		</div>
+	</div>
+</section>
+
+<% include ../partials/footer %>
