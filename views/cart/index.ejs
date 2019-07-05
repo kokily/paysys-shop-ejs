@@ -24,9 +24,9 @@
 						for (let key in cartList) {
 				%>
 					<tr>
-						<td><%= cartList[key].native %></td>
-						<td><%= cartList[key].productName %></td>
-						<td>
+						<td style="vertical-align: middle;"><%= cartList[key].native %></td>
+						<td style="vertical-align: middle;"><%= cartList[key].productName %></td>
+						<td style="vertical-align: middle;">
 							<%
 								function comma (num) {
 									return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -36,8 +36,8 @@
 							%>
 							<%= newprice %>
 						</td>
-						<td><%= cartList[key].number %></td>
-						<td>
+						<td style="vertical-align: middle;"><%= cartList[key].number %></td>
+						<td style="vertical-align: middle;">
 							<%
 								function comma (num) {
 									return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -47,11 +47,11 @@
 							%>
 							<%= newamount %> 원
 						</td>
-						<td>
+						<td style="vertical-align: middle;">
 							<a href="#" class="deleteCart btn btn-danger btn-group btn-animated"
 								productId="<%= key %>"
 							>
-								삭제
+								삭제 <i class="fa fa-ban"></i>
 							</a>
 						</td>
 					</tr>
