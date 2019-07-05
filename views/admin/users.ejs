@@ -1,0 +1,53 @@
+<% include ../partials/header %>
+
+<div id="page-start"></div>
+
+<section class="main-container" style="margin-top: 60px;">
+  <div class="container">
+    <div class="row">
+      <div class="main col-lg-8 order-lg-2 ml-xl-auto">
+
+        <h3 class="mb-4">사용자 리스트</h3>
+
+        <table class="table table-hover table-colored text-center">
+          <tr>
+            <th>아이디</th>
+            <th>사원번호</th>
+            <th>이름</th>
+            <th>생성일자</th>
+          </tr>
+
+          <% if (users == null || users.length == 0) { %>
+            <tr>
+              <td colspan="4">가입자가 없습니다</td>
+            </tr>
+          <% } %>
+
+          <% users.forEach((users) => { %>
+            <tr>
+              <td style="vertical-align: middle;">
+                <%= users.id %>
+              </td>
+              <td style="vertical-align: middle;">
+                <%= users.employee %>
+              </td>
+              <td style="vertical-align: middle;">
+                <%= users.username %>
+              </td>
+              <td style="vertical-align: middle;">
+                <%= users.getDate.year %>년 
+                <%= users.getDate.month %>월 
+                <%= users.getDate.day %>일
+              </td>
+            </tr>
+          <% }) %>
+        </table>
+
+      </div>
+
+      <% include ./aside %>
+    </div>
+  </div>
+</section>
+
+<% include ../partials/footer %>

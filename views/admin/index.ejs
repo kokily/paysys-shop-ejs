@@ -2,10 +2,139 @@
 
 <div id="page-start"></div>
 
+<style>
+  .searchHighlight {
+    background-color: pink;
+  }
+</style>
+
 <section class="main-container" style="margin-top: 60px;">
   <div class="container">
     <div class="row">
       <div class="main col-lg-8 order-lg-2 ml-xl-auto">
+
+        <h3 class="mb-4">상품 리스트</h3>
+        
+        <table class="table table-hover table-colored text-center">
+          <tr>
+            <th>분류</th>
+            <th>구분</th>
+            <th>상품명</th>
+            <th>단가</th>
+            <th>단위</th>
+            <th>삭제</th>
+          </tr>
+          
+          <% if(products == null || products.length == 0) { %>
+            <tr>
+              <td colspan="6">데이터가 없습니다 ㅜㅜ...</td>
+            </tr>
+          <% } %>
+
+          <% products.forEach((product) => { %>
+            <tr onclick="location.href='/admin/detail/<%= product.id %>'">
+              <td style="vertical-align: middle;">
+                <%= product.division %>
+              </td>
+              <td style="vertical-align: middle;">
+                <%= product.native %>
+              </td>
+              <td class="highlight" data-highlight="<%= search.highlight.productName %>" style="vertical-align: middle;">
+                <%= product.productName %>
+              </td>
+              <td style="vertical-align: middle;">
+                <%
+                  function comma (num) {
+                    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                  }
+
+                  var newprice = comma(product.price);
+                %>
+                <%= newprice %>
+              </td>
+              <td style="vertical-align: middle;">
+                <%= product.unit %>
+              </td>
+              <td style="vertical-align: middle;">
+                <a href="/admin/delete/<%= product.id %>" class="btn btn-default btn-sm"
+                  onclick="return confirm('삭제하시겠습니까??')"
+                >
+                  삭 제
+                </a>
+              </td>
+            </tr>
+          <% }) %>
+        </table>
+
+        <div class="search">
+          <form class="checkValidation" action="/admin" id="search">
+            <table class="table">
+              <colgroup>
+                <col style="width: 20%;" />
+                <col style="width: 60%;" />
+                <col />
+              </colgroup>
+              <tr>
+                <td scope="col" style="vertical-align: middle;">
+                  <select name="searchType" class="form-control">
+                    <% var select %>
+                    <option value="productName"
+                      <%= search.searchType=="productName"?selected="selected":"" %>
+                    >
+                      상품명
+                    </option>
+                  </select>
+                </td>
+                <td scope="col" style="vertical-align: middle;">
+                  <input class="cvMinLength form-control" cvMinLength="3"
+                    cvMinLenErrTo="#searchError"
+                    cvMinLenErrMsg="It should be at least 3 characters"
+                    type="text" name="searchText" value="<%= select?search.searchText:'' %>"
+                  />
+                </td>
+                <td scope="col" style="vertical-align: middle;">
+                  <button type="submit" class="btn btn-group btn-success btn-animated">
+                    검색 <i class="fa fa-info"></i>
+                  </button>
+                  <div class="message" id="searchError"></div>
+                </td>
+              </tr>
+            </table>
+          </form>
+        </div>
+
+        <nav aria-label="Page navigation">
+          <ul class="pagination justify-content-center">
+            <% var offset = 3; %>
+            <% for (i=1; i<=maxPage; i++) { %>
+              <% if (i<=offset || i>maxPage-offset || (i>=page-(offset-1) && i<=page+(offset-1))) { %>
+                <% if (i != page) { %>
+                  <li class="page-item">
+                    <a class="page-link" href="/admin?page=<%= i %>">
+                      <%= i %>
+                    </a>
+                  </li>
+                <% } else { %>
+                  <li class="page-item active">
+                    <a class="page-link">
+                      <%= i %>
+                    </a>
+                  </li>
+                <% } %>
+              <% } else if (i == offset+1 || i == maxPage-offset) { %>
+                <li class="page-item disabled">
+                  <a class="page-link">
+                    ...
+                  </a>
+                </li>
+              <% } %>
+            <% } %>
+          </ul>
+        </nav>
+
+        <a href="/admin/new" class="btn btn-group btn-default btn-animated">
+          품목 추가 <i class="fa fa-file"></i>
+        </a>
 
       </div>
 

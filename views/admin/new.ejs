@@ -1,0 +1,100 @@
+<% include ../partials/header %>
+
+<div id="page-start"></div>
+
+<section class="main-container" style="margin-top: 60px;">
+  <div class="container">
+    <div class="row">
+      <div class="main col-lg-8 order-lg-2 ml-xl-auto">
+
+        <div id="text-rotator-text" class="mt-4 text-rotator-text d-none">
+					<p>상품 등록 메뉴</p>
+				</div>
+				<h2 id="text-rotator" class="d-inline-block text-rotator" style="min-height: 40px;"></h2>
+
+				<form id="add_product" action="" method="post" class="form-horizontal">
+					<div class="form-group has-feedback row">
+						<label for="native" class="col-md-3 control-label text-md-right col-form-label">
+							출 신 <span class="text-danger small">*</span>
+						</label>
+						<div class="col-md-8">
+							<select class="form-control" id="native" name="native" value="<%= product.native%>">
+								<option value="현역">현역</option>
+								<option value="예비역">예비역</option>
+								<option value="일반">일반</option>
+							</select>
+						</div>
+					</div>
+
+					<div class="form-group has-feedback row">
+						<label for="division" class="col-md-3 control-label text-md-right col-form-label">
+							구 분 <span class="text-danger small">*</span>
+						</label>
+						<div class="col-md-8">
+							<select class="form-control" id="division" name="division" value="<%= product.division %>">
+								<option value="식사메뉴">식사메뉴</option>
+								<option value="레드와인">레드와인</option>
+								<option value="화이트와인">화이트와인</option>
+								<option value="샴페인">샴페인</option>
+								<option value="양주">양주</option>
+								<option value="민속주">민속주</option>
+								<option value="고량주">고량주</option>
+								<option value="기타주류">기타주류</option>
+								<option value="반입료">반입료</option>
+								<option value="대관료">대관료</option>
+								<option value="칵테일">칵테일</option>
+								<option value="부대비용">부대비용</option>
+							</select>
+						</div>
+					</div>
+
+					<div class="form-group has-feedback row">
+						<label for="productName" class="col-md-3 control-label text-md-right col-form-label">
+							상품명 <span class="text-danger small"></span>
+						</label>
+						<div class="col-md-8">
+							<input type="text" class="form-control" name="productName" value="<%= product.productName %>" />
+							<i class="fa fa-archive form-control-feedback pr-4"></i>
+						</div>
+					</div>
+
+					<div class="form-group has-feedback row">
+						<label for="price" class="col-md-3 control-label text-md-right col-form-label">
+							단 가 <span class="text-danger small"></span>
+						</label>
+						<div class="col-md-8">
+							<input type="number" class="form-control" name="price" value="<%= product.price%>" />
+							<i class="fa fa-calculator form-control-feedback pr-4"></i>
+						</div>
+					</div>
+
+					<div class="form-group has-feedback row">
+						<label for="unit" class="col-md-3 control-label text-md-right col-form-label">
+							단 위 <span class="text-danger small"></span>
+						</label>
+						<div class="col-md-8">
+							<input type="text" class="form-control" name="unit" value="<%= product.unit %>" />
+							<i class="fa fa-calendar form-control-feedback pr-4"></i>
+						</div>
+					</div>
+
+					<div class="form-group row">
+            <div class="ml-md-auto col-md-9">
+              <button type="submit" class="btn btn-group btn-default btn-animated">
+                 품목 저장 <i class="fa fa-check"></i>
+              </button>
+            </div>
+          </div>
+
+				</form>
+
+      </div>
+
+      <% include ./aside %>
+    </div>
+  </div>
+</section>
+
+<script src="/assets/plugins/typed/typed.min.js"></script>
+
+<% include ../partials/footer %>

@@ -1,0 +1,59 @@
+<% include ../partials/header %>
+
+<div id="page-start"></div>
+
+<section class="main-container" style="margin-top: 60px;">
+	<div class="container">
+		<div class="row">
+			<div class="main col-lg-8 order-lg-2 ml-xl-auto">
+				<div id="text-rotator-text" class="mt-4 text-rotator-text d-none">
+					<p>상품 상세 정보보기</p>
+				</div>
+				<h2 id="text-rotator" class="d-inline-block text-rotator" style="min-height: 40px;"></h2>
+
+				<table class="table table-colored table-hoverable text-center">
+					<tr>
+						<td><strong>_id</strong></td>
+						<td><%= product._id %></td>
+					</tr>
+					<tr>
+						<td><strong>상품ID</strong></td>
+						<td><%= product.id %></td>
+					</tr>
+					<tr>
+						<td><strong>출 신</strong></td>
+						<td><%= product.native %></td>
+					</tr>
+					<tr>
+						<td><strong>구 분</strong></td>
+						<td><%= product.division %></td>
+					</tr>
+					<tr>
+						<td><strong>상품명</strong></td>
+						<td><%= product.productName %></td>
+					</tr>
+					<tr>
+						<td><strong>단 가</strong></td>
+						<td><%= product.price %></td>
+					</tr>
+					<tr>
+						<td><strong>단 위</strong></td>
+						<td><%= product.unit %></td>
+					</tr>
+				</table>
+
+				<a class="btn btn-group btn-default btn-animated" href="/admin">
+					목록으로 <i class="fa fa-file"></i>
+				</a>
+				<a class="btn btn-group btn-warning btn-animated" href="/admin/edit/<%= product.id %>">
+					수정하기 <i class="fa fa-tags"></i>
+				</a>
+
+			</div>
+
+			<% include ./aside %>
+		</div>
+	</div>
+</section>
+
+<% include ../partials/footer %>
