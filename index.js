@@ -59,9 +59,11 @@ app.use(function(req, res, next) {
 import home from './api/home';
 import admin from './api/admin';
 import auth from './api/auth';
+import cart from './api/cart';
 
 app.use('/', home);
 app.use('/admin', admin);
 app.use('/auth', auth);
+app.use('/cart', cart);
 
 app.listen(process.env.PORT, () => console.log(`Express Server On ${process.env.PORT} PORT!!!`));
