@@ -11,28 +11,32 @@
 			<div class="col-md-8"></div>
 			<div class="col-md-4">
 				<table class="table table-hover table-colored text-center">
-					<tr>
-						<th><h5>사원번호</h5></th>
-						<td><h5><%= data.employee %></h5></td>
-					</tr>
-					<tr>
-						<th><h5>작 성 자</h5></th>
-						<td><h5><%= data.username %></h5></td>
-					</tr>
-					<tr>
-						<th><h5>작성일자</h5></th>
-						<td>
-							<h5>
-								<%= data.getDate.year %>. 
-								<%= data.getDate.month %>. 
-								<%= data.getDate.day %>.
-							</h5>
-						</td>
-					</tr>
-					<tr>
-						<th><h5>행 사 장</h5></th>
-						<td><h5><%= data.hall %></h5></td>
-					</tr>
+					<% if (data == null || data.length == 0) { %>
+						
+					<% } else { %>
+						<tr>
+							<th><h5>사원번호</h5></th>
+							<td><h5><%= data.employee %></h5></td>
+						</tr>
+						<tr>
+							<th><h5>작 성 자</h5></th>
+							<td><h5><%= data.username %></h5></td>
+						</tr>
+						<tr>
+							<th><h5>작성일자</h5></th>
+							<td>
+								<h5>
+									<%= data.getDate.year %>. 
+									<%= data.getDate.month %>. 
+									<%= data.getDate.day %>.
+								</h5>
+							</td>
+						</tr>
+						<tr>
+							<th><h5>행 사 장</h5></th>
+							<td><h5><%= data.hall %></h5></td>
+						</tr>
+					<% } %>
 				</table>
 			</div>
 		</div>
@@ -55,6 +59,13 @@
 							<th scope="col">총가격</th>
 						</tr>
 					</thead>
+					<% if (data == null || data.length == 0) { %>
+						<tbody>
+							<tr>
+								<td colspan="5">데이터가 없습니다.</td>
+							</tr>
+						</tbody>
+					<% } %>
 					<%
 						data.cartList.forEach((line) => {
 							function comma (num) {
