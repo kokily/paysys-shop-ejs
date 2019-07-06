@@ -58,7 +58,7 @@ api.get('/reserve/menu/:id', (req, res) => {
 
 // 일반 메뉴 (GET) '/general'
 api.get('/general', (req, res) => {
-  Product.find({'native': '일반'}).distinct('division').exec()
+  Product.find({'native': '일반인'}).distinct('division').exec()
     .then((products) => {
       res.render('home/general', {
         title: '일반 전표 메뉴',
@@ -69,7 +69,7 @@ api.get('/general', (req, res) => {
 
 // 일반 세부 메뉴 (GET) '/general/menu/:id'
 api.get('/general/menu/:id', (req, res) => {
-  Product.find({'native': '일반', 'division': req.params.id})
+  Product.find({'native': '일반인', 'division': req.params.id})
     .sort({"id": 1}).exec()
     .then((products) => {
       res.render('home/menu', {
