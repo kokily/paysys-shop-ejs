@@ -30,6 +30,16 @@ const Check = new mongoose.Schema({
   }
 });
 
+Check.virtual('getDate').get(function () {
+  const date = new Date(this.createdAt);
+
+  return {
+    year: date.getFullYear(),
+    month: date.getMonth() + 1,
+    day: date.getDate()
+  }
+});
+
 Check.plugin(autoIncrement.plugin, {
   model: 'Check',
   field: 'id',

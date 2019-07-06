@@ -1,0 +1,57 @@
+<% include ../partials/header %>
+
+<div id="page-starter"></div>
+
+<section class="main-container" style="margin-top: 60px;">
+	<div class="container">
+		<h1 class="page-title text-center">
+			행사전표 (최근 5건)<br />
+			<% if (data[0].username) { %>
+				[<span style="color: #4285f4;"><%= data[0].username %></span>] 님
+			<% } else { %>
+				No data
+			<% } %>
+		</h1>
+		<div class="separator-2"></div>
+
+		<div class="row justify-content-center">
+			<div class="col-md-12">
+				<table class="table table-hover table-colored text-center">
+					<thead>
+						<tr>
+							<th>순번</th>
+							<th>행사명</th>
+							<th>전표생성일</th>
+							<th>행사장소</th>
+						</tr>
+					</thead>
+					<tbody>
+						<% if (data === null || data.length === 0) { %>
+							<tr>
+								<td colspan="4">
+									저장된 자료가 없습니다!
+								</td>
+							</tr>
+						<% } else { 
+							data.forEach((line) => { %>
+							<tr onclick="location.href='/front/user/detail/<%= line.id %>'"
+								style="cursor: pointer;"
+							>
+								<td><%= line.id %></td>
+								<td><%= line.title %></td>
+								<td>
+									<%= line.getDate.year %>년 
+									<%= line.getDate.month %>월 
+									<%= line.getDate.day %>일
+								</td>
+								<td><%= line.hall %></td>
+							</tr>
+						<% })} %>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</section>
+
+<% include ../partials/footer %>

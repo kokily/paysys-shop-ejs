@@ -1,0 +1,127 @@
+<% include ../partials/header %>
+
+<div id="page-start"></div>
+
+<style>
+	.searchHighlight {
+		background-color: pink;
+	}
+</style>
+
+<section class="main-container" style="margin-top: 60px;">
+	<h1 class="page-title text-center">행사전표 리스트</h1>
+
+	<div class="separator-2 m-4"></div>
+
+	<div class="row justify-content-center">
+		<div class="col-10">
+			<table class="table table-hover table-colored text-center">
+				<tr>
+					<th>순번</th>
+					<th>행사명</th>
+					<th>전표생성일</th>
+					<th>행사장소</th>
+					<th>작성자</th>
+				</tr>
+
+				<% if (checks == null || checks.length == 0) { %>
+					<tr>
+						<td colspan="6">데이터가 없습니다 ㅜㅜ...</td>
+					</tr>
+				<% } %>
+
+				<% checks.forEach((front) => { %>
+					<tr onclick="location.href='/front/<%= front.id %>'" style="cursor: pointer;">
+						<td style="vertical-align: middle;">
+							<%= front.id %>
+						</td>
+						<td	class="highlight" data-highlight="<%= search.highlight.title %>"
+							style="vertical-align: middle;"
+						>
+							<%= front.title %>
+						</td>
+						<td style="vertical-align: middle;">
+							<%= front.getDate.year %>년 
+							<%= front.getDate.month %>월 
+							<%= front.getDate.day %>일
+						</td>
+						<td style="vertical-align: middle;">
+							<%= front.hall %>
+						</td>
+						<td style="vertical-align: middle;">
+							<%= front.username %> 님
+						</td>
+					</tr>
+				<% }) %>
+			</table>
+
+			<div class="search">
+				<form class="checkValidation" action="/front" id="search">
+					<table class="table text-center">
+						<colgroup>
+							<col style="width: 20%;" />
+							<col style="width: 60%;" />
+							<col />
+						</colgroup>
+						<tr>
+							<td scope="col" style="vertical-align: middle;">
+								<select name="searchType" class="form-control">
+									<% var select %>
+									<option value="title"
+										<%= search.searchType=="title"?selected="selected":"" %>
+									>
+										행사명
+								</select>
+							</td>
+							<td scope="col" style="vertical-align: middle;">
+								<input class="cvMinLength form-control" cvMinLength="3"
+									cvMinLenErrTo="#searchError"
+									cvMinLenErrMsg="It should be at least 3 characters"
+									type="text" name="searchText" value="<%= select?search.searchText:'' %>"
+								/>
+							</td>
+							<td scope="col" style="vertical-align: middle; justify-content-center">
+								<button type="submit" class="btn btn-group btn-success btn-animated">
+									검색 <i class="fa fa-info"></i>
+								</button>
+								<div class="message" id="serachError"></div>
+							</td>
+						</tr>
+					</table>
+				</form>
+			</div>
+
+			<nav aria-label="Page navigation">
+				<ul class="pagination justify-content-center">
+					<% var offset = 3; %>
+					<% for (i=1; i<=maxPage; i++) { %>
+						<% if (i<=offset || i>maxPage-offset || (i>=page-(offset-1) && i<=page+(offset-1))) { %>
+							<% if (i != page) { %>
+								<li class="page-item">
+									<a class="page-link" href="/front?page=<%= i %>">
+										<%= i %>
+									</a>
+								</li>
+							<% } else { %>
+								<li class="page-item active">
+									<a class="page-link">
+										<%= i %>
+									</a>
+								</li>
+							<% } %>
+						<% } else if (i == offset+1 || i == maxPage-offset) { %>
+							<li class="page-item disabled">
+								<a class="page-link">
+									...
+								</a>
+							</li>
+						<% } %>
+					<% } %>
+				</ul>
+			</nav>
+
+		</div>
+	</div>
+</section>
+
+<% include ../partials/footer %>

@@ -1,0 +1,125 @@
+<% include ../partials/header %>
+
+<div id="page-starter"></div>
+
+<section class="main-container" style="margin-top: 60px;">
+	<div class="container">
+		<h1 class="page-title text-center" style="color: #4285f4;">행사전표 세부내역</h1>
+		<div class="separator-2 m-4"></div>
+
+		<div class="row">
+			<div class="col-md-8"></div>
+			<div class="col-md-4">
+				<table class="table table-hover table-colored text-center">
+					<tr>
+						<th><h5>사원번호</h5></th>
+						<td><h5><%= data.employee %></h5></td>
+					</tr>
+					<tr>
+						<th><h5>작 성 자</h5></th>
+						<td><h5><%= data.username %></h5></td>
+					</tr>
+					<tr>
+						<th><h5>작성일자</h5></th>
+						<td>
+							<h5>
+								<%= data.getDate.year %>. 
+								<%= data.getDate.month %>. 
+								<%= data.getDate.day %>.
+							</h5>
+						</td>
+					</tr>
+					<tr>
+						<th><h5>행 사 장</h5></th>
+						<td><h5><%= data.hall %></h5></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+
+		<div class="separator-2"></div>
+
+		<div class="row">
+			<div class="col-md-12">
+				<h2 class="page-title text-center">
+					행사명: [ <span class="text-primary"><%= data.title %></span> ]
+				</h2>
+
+				<table class="table table-hover table-colored text-center">
+					<thead>
+						<tr class="text-primary">
+							<th scope="col">구분</th>
+							<th scope="col">상품명</th>
+							<th scope="col">단가</th>
+							<th scope="col">수량</th>
+							<th scope="col">총가격</th>
+						</tr>
+					</thead>
+					<%
+						data.cartList.forEach((line) => {
+							function comma (num) {
+								return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+							}
+
+							var newPrice = comma(line.price);
+							var newNumber = comma(line.number);
+							var newAmount = comma(line.amount);
+					%>
+					<tbody>
+						<tr>
+							<th scope="row"><%= line.native %></th>
+							<td><%= line.productName %></td>
+							<td><%= newPrice %>원</td>
+							<td><%= newNumber %></td>
+							<td><%= newAmount %>원</td>
+						</tr>
+					</tbody>
+					<% }) %>
+				</table>
+
+				<div class="separator-2"></div>
+
+				<div class="text-right" style="font-size: 1.5rem;">
+					결제금액 : 
+					<span style="color: red;">
+						<%
+							function comma (num) {
+								return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+							}
+							
+							var newTotal = comma(data.totalAmount);
+						%>
+						<%= newTotal %>
+					</span> 원
+				</div>
+
+				<div class="text-right m-2">
+					<a href="/front/user/<%= userData.employee %>"
+						class="btn btn-group btn-success btn-animated">
+						목록으로 <i class="fa fa-location-arrow"></i>
+					</a>
+				</div>
+
+				<div class="alert alert-primary" role="alert">
+					<h4 class="alert-heading text-center">기타사항</h4>
+					<hr />
+
+					<p class="mb-0 text-center" style="white-space: pre-line;">
+						<%= data.etc %>
+					</p>
+				</div>
+
+				<div class="alert alert-success default-hovered" role="alert">
+					<h4 class="alert-heading">
+						오타나 수정사항이 있으실 경우 운영부 직원에게
+						삭제요청을 하시고 다시 입력을 해주시기
+						바랍니다.
+					</h4>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</section>
+
+<% include ../partials/footer %>
