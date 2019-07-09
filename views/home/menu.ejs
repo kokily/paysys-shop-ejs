@@ -31,6 +31,27 @@
 			<% }) %>
 
 		</div>
+
+		<div class="row justify-content-center mt-4">
+			<%
+				var gubun = '';
+
+				switch (products[0].native) {
+					case '현역':
+						gubun = 'soldier';
+						break;
+					case '예비역':
+						gubun = 'reserve';
+						break;
+					case '일반인':
+						gubun = 'general';
+						break;
+				}
+			%>
+			<a href="/<%= gubun %>" class="btn btn-group btn-warning btn-animated">
+				뒤 로 <i class="fa fa-calendar""></i>
+			</a>
+		</div>
 	</div>
 </section>
 
