@@ -120,7 +120,7 @@ function createSearch (queries) {
   var findPost = {};
   var highlight = {};
 
-  if (queries.searchType && queries.searchText && queries.searchText.length >= 3) {
+  if (queries.searchType && queries.searchText && queries.searchText.length >= 2) {
     var searchTypes = queries.searchType.toLowerCase().split(",");
     var postQueries = [];
 

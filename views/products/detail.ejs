@@ -43,29 +43,12 @@
 							<input type="hidden" name="amount" value="<%= product.price %>" />
 
 							<div>
-								<div class="printNum" style="display: flex; font-size: 1.2rem;">
-									수량 : <p id="amountHtml" style="margin-left: 2rem;">1</p>
+								<div class="printNum" style="display: flex; font-size: 1rem;">
+									<label for="CountBox" class="form-control">수량</label>
+									<input type="number" class="form-control" id="CountBox"
+										style="display: inline-block; margin-left: 1rem;" />
 								</div>
-								<div class="CountBox mt-2" style="display: grid;">
-									<a href="#" class="m-1 text-center btn btn-group btn-animated btn-danger" type="minus-100">
-										-100 <i class="fa fa-angle-down"></i>
-									</a>
-									<a href="#" class="m-1 btn btn-group btn-animated btn-danger" type="minus-10">
-										-10 <i class="fa fa-angle-down"></i>
-									</a>
-									<a href="#" class="m-1 btn btn-group btn-animated btn-danger" type="minus">
-										-1 <i class="fa fa-angle-down"></i>
-									</a>
-									<a href="#" class="m-1 btn btn-group btn-animated btn-default" type="plus">
-										+1 <i class="fa fa-angle-up"></i>
-									</a>
-									<a href="#" class="m-1 btn btn-group btn-animated btn-default" type="plus-10">
-										+10 <i class="fa fa-angle-up"></i>
-									</a>
-									<a href="#" class="m-1 btn btn-group btn-animated btn-default" type="plus-100">
-										+100 <i class="fa fa-angle-up"></i>
-									</a>
-								</div>
+								
 								<div class="priceWrap mt-4 text-right">
 									<h2>
 										합계 금액 : 
@@ -103,39 +86,18 @@
 
 <script>
 	$(document).ready(function () {
-		$('.CountBox a').click(function (event) {
-			event.preventDefault();
+		$('#CountBox').keyup(function (e) {
+			e.preventDefault();
 
-			var type = $(this).attr('type');
-			var cartNum = $('input[name=number]').val();
-			var price = $('input[name=price]').val();
+			var cnt = $('#CountBox').val();
 
-			switch (type) {
-				case 'minus-100':
-					cartNum -= ((cartNum < 101) ? 0 : 100);
-					break;
-				case 'minus-10':
-					cartNum -= ((cartNum < 11) ? 0 : 10);
-					break;
-				case 'minus':
-					cartNum -= ((cartNum == 1) ? 0 : 1);
-					break;
-				case 'plus':
-					cartNum++;
-					break;
-				case 'plus-10':
-					cartNum = parseInt(cartNum) + 10;
-					break;
-				case 'plus-100':
-					cartNum = parseInt(cartNum) + 100;
-					break;
-				default:
-					break;
+			if (cnt < 0) {
+				cnt = Math.abs(cnt);
+				$('#CountBox').val(cnt);
 			}
 
-			$('input[name=number]').val(cartNum);
-			$('#amountHtml').html(cartNum);
-			$('input[name=amount]').val(cartNum * price);
+			var price = $('#cartForm input[name=price]').val();
+			var cartNum = cnt;
 
 			function comma(num) {
       	return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
