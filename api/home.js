@@ -1,5 +1,6 @@
 import express from 'express';
 import Product from '../models/Product';
+import loginRequired from '../libs/login-required';
 
 const api = express.Router();
 
@@ -11,7 +12,7 @@ api.get('/', (req, res) => {
 });
 
 // 현역 메뉴 (GET) '/soldier'
-api.get('/soldier', (req, res) => {
+api.get('/soldier', loginRequired, (req, res) => {
   Product.find({'native': '현역'}).distinct('division').exec()
     .then((products) => {
       res.render('home/soldier', {
@@ -22,7 +23,7 @@ api.get('/soldier', (req, res) => {
 });
 
 // 현역 세부 메뉴 (GET) '/soldier/menu/:id'
-api.get('/soldier/menu/:id', (req, res) => {
+api.get('/soldier/menu/:id', loginRequired, (req, res) => {
   Product.find({'native': '현역', 'division': req.params.id})
     .sort({"id": 1}).exec()
     .then((products) => {
@@ -34,7 +35,7 @@ api.get('/soldier/menu/:id', (req, res) => {
 });
 
 // 예비역 메뉴 (GET) '/reserve'
-api.get('/reserve', (req, res) => {
+api.get('/reserve', loginRequired, (req, res) => {
   Product.find({'native': '예비역'}).distinct('division').exec()
     .then((products) => {
       res.render('home/reserve', {
@@ -45,7 +46,7 @@ api.get('/reserve', (req, res) => {
 });
 
 // 예비역 세부 메뉴 (GET) '/reserve/menu/:id'
-api.get('/reserve/menu/:id', (req, res) => {
+api.get('/reserve/menu/:id', loginRequired, (req, res) => {
   Product.find({'native': '예비역', 'division': req.params.id})
     .sort({"id": 1}).exec()
     .then((products) => {
@@ -57,7 +58,7 @@ api.get('/reserve/menu/:id', (req, res) => {
 });
 
 // 일반 메뉴 (GET) '/general'
-api.get('/general', (req, res) => {
+api.get('/general', loginRequired, (req, res) => {
   Product.find({'native': '일반인'}).distinct('division').exec()
     .then((products) => {
       res.render('home/general', {
@@ -68,7 +69,7 @@ api.get('/general', (req, res) => {
 });
 
 // 일반 세부 메뉴 (GET) '/general/menu/:id'
-api.get('/general/menu/:id', (req, res) => {
+api.get('/general/menu/:id', loginRequired, (req, res) => {
   Product.find({'native': '일반인', 'division': req.params.id})
     .sort({"id": 1}).exec()
     .then((products) => {

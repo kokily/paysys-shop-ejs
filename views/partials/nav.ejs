@@ -139,12 +139,23 @@
                       <li class="nav-item">
                         <a href="/front/user/<%= userData.employee %>" class="nav-link">개별전표</a>
                       </li>
+
                     <% } %>
-                    
+
+                    <% if(typeof(userData) !== 'undefined' && (
+                      userData.username === 'admin' ||
+                      userData.username === '프론트' ||
+                      userData.username === '김현성' ||
+                      userData.username === '이준호' ||
+                      userData.username === '마혜진' ||
+                      userData.username === '최보람' ||
+                      userData.username === '박원빈'
+                    )) { %>
                       <li class="nav-item">
                         <a href="/front" class="nav-link">프런트</a>
                       </li>
-                    
+                    <% } %>
+
                   </ul>
                 </div>
 

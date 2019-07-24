@@ -105,6 +105,7 @@
 			
 			var newAmount = comma(cartNum * price);
 			$('#priceHtml').html(newAmount);
+			$('input[name=amount]').val(cartNum * price);
 		});
 	});
 
@@ -115,7 +116,7 @@
 			var productName = "<%= product.productName %>";
 			var price = "<%= product.price %>";
 
-			var number = $('input[name=number]').val();
+			var number = $('#CountBox').val();
 			var amount = $('input[name=amount]').val();
 
 			var cartList = {};
