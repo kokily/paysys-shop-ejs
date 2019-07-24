@@ -33,10 +33,10 @@
 
           <% products.forEach((product) => { %>
             <tr onclick="location.href='/admin/detail/<%= product.id %>'" style="cursor: pointer;">
-              <td style="vertical-align: middle;">
+              <td class="highlight" data-highlight="<%= search.highlight.division %>" style="vertical-align: middle;">
                 <%= product.division %>
               </td>
-              <td style="vertical-align: middle;">
+              <td class="highlight" data-highlight="<%= search.highlight.native %>" style="vertical-align: middle;">
                 <%= product.native %>
               </td>
               <td class="highlight" data-highlight="<%= search.highlight.productName %>" style="vertical-align: middle;">
@@ -78,11 +78,9 @@
                 <td scope="col" style="vertical-align: middle;">
                   <select name="searchType" class="form-control">
                     <% var select %>
-                    <option value="productName"
-                      <%= search.searchType=="productName"?selected="selected":"" %>
-                    >
-                      상품명
-                    </option>
+                    <option value="division" <%= search.searchType=="division"?selected="selected":"" %>>분 류</option>
+                    <option value="native" <%= search.searchType=="native"?selected="selected":"" %>>출신구분</option>
+                    <option value="productName" <%= search.searchType=="productName"?selected="selected":"" %>>상품명</option>
                   </select>
                 </td>
                 <td scope="col" style="vertical-align: middle;">

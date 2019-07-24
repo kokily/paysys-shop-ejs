@@ -133,6 +133,24 @@ function createSearch (queries) {
       highlight.productName = queries.searchText;
     }
 
+    if (searchTypes.indexOf("division") >= 0) {
+      postQueries.push({
+        division: {
+          $regex: new RegExp(queries.searchText, "i")
+        }
+      });
+      highlight.division = queries.searchText;
+    }
+
+    if (searchTypes.indexOf("native") >= 0) {
+      postQueries.push({
+        native: {
+          $regex: new RegExp(queries.searchText, "i")
+        }
+      });
+      highlight.native = queries.searchText;
+    }
+
     if (postQueries.length > 0) findPost = { $or: postQueries };
   }
 

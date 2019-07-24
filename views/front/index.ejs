@@ -46,10 +46,14 @@
 									<%= front.getDate.month %>월 
 									<%= front.getDate.day %>일
 								</td>
-								<td style="vertical-align: middle;">
+								<td class="highlight" data-highlight="<%= search.highlight.hall %>"
+									style="vertical-align: middle;"
+								>
 									<%= front.hall %>
 								</td>
-								<td style="vertical-align: middle;">
+								<td class="highlight" data-highlight="<%= search.highlight.username %>"
+									style="vertical-align: middle;"
+								>
 									<%= front.username %> 님
 								</td>
 							</tr>
@@ -68,10 +72,9 @@
 									<td scope="col" style="vertical-align: middle;">
 										<select name="searchType" class="form-control">
 											<% var select %>
-											<option value="title"
-												<%= search.searchType=="title"?selected="selected":"" %>
-											>
-												행사명
+											<option value="title" <%= search.searchType=="title"?selected="selected":"" %>>행사명</option>
+											<option value="hall" <%= search.searchType=="hall"?selected="selected":"" %>>행사장소</option>
+											<option value="username" <%= search.searchType=="username"?selected="selected":"" %>>작성자</option>
 										</select>
 									</td>
 									<td scope="col" style="vertical-align: middle;">

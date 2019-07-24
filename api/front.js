@@ -91,6 +91,24 @@ function createSearch (queries) {
 			highlight.title = queries.searchText;
 		}
 
+		if (searchTypes.indexOf("hall") >= 0) {
+			postQueries.push({
+				hall: {
+					$regex: new RegExp(queries.searchText, "i")
+				}
+			});
+			highlight.hall = queries.searchText;
+		}
+
+		if (searchTypes.indexOf("username") >= 0) {
+			postQueries.push({
+				username: {
+					$regex: new RegExp(queries.searchText, "i")
+				}
+			});
+			highlight.username = queries.searchText;
+		}
+
 		if (postQueries.length > 0) findPost = { $or: postQueries };
 	}
 
