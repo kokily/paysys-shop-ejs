@@ -128,8 +128,8 @@
 
 <script>
 	$(document).ready(function () {
-		$('.deleteCart').click(function (event) {
-			event.preventDefault();
+		$('.deleteCart').click(function (e) {
+			e.preventDefault();
 
 			if (confirm('삭제하시겠습니까?')) {
 				const productId = $(this).attr('productId');
@@ -146,8 +146,8 @@
 			}
 		});
 
-		$('.deleteAll').click(function (event) {
-			event.preventDefault();
+		$('.deleteAll').click(function (e) {
+			e.preventDefault();
 
 			if (confirm('전체 전표 리스트를 삭제하시겠습니까?')) {
 				setCookieHour("cartList", '', 0);
@@ -159,7 +159,7 @@
 
 		$('#trans').click(function () {
 			if (confirm('전표를 전송하시겠습니까??')) {
-				var msg = '전표가 전송되었습니다. 프론트 확인 요망'
+				var msg = '전표가 전송되었습니다. 프런트 확인 요망'
 				socket.emit("trans", msg);
 			}
 		});

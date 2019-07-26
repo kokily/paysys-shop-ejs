@@ -11,7 +11,7 @@ const api = express.Router();
 // 전표 리스트 조회 (GET) '/front'
 api.get('/', frontRequired, (req, res) => {
 	let page = Math.max(1, req.query.page);
-	let limit = 5;
+	let limit = 10;
 	let search = createSearch(req.query);
 
 	Checkout.countDocuments(search.findPost)

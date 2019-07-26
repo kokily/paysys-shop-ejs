@@ -28,9 +28,9 @@ api.get('/', adminRequired, (req, res) => {
             products, page, maxPage, search
           });
         })
-        .catch(e => console.error(e.stack));
+        .catch(err => console.error(err.stack));
     })
-    .catch(e => console.error(e.stack));
+    .catch(err => console.error(err.stack));
 });
 
 // 상품 등록 (GET) '/admin/new'

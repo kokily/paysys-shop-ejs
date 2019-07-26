@@ -78,7 +78,7 @@ api.post('/register', (req, res) => {
     .then(() => {
       res.redirect('/')
     })
-    .catch(e => console.error(e.stack));
+    .catch(err => console.error(err.stack));
 });
 
 // 로그아웃 처리 (GET) '/auth/logout
