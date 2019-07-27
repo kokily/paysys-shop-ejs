@@ -129,4 +129,22 @@
 	</div>
 </section>
 
+<script>
+	(function () {
+		$(document).ready(function () {
+			$('#search').submit(function () {
+				var $searchText = $('#search input[name=searchText]');
+
+				if (!$searchText.val()) {
+					alert('검색어 입력하시죵??');
+					$searchText.focus();
+					return false;
+				}
+
+				return true;
+			})
+		})
+	})();
+</script>
+
 <% include ../partials/footer %>
