@@ -58,7 +58,7 @@
 							<div class="printNum" style="display: flex; font-size: 1rem;">
 								<label for="CountBox" class="form-control">수량</label>
 								<input type="number" class="form-control" id="CountBox"
-									style="display: inline-block; margin-left: 1rem;" />
+									style="display: inline-block; margin-left: 1rem; text-align: center;" />
 							</div>
 							
 							<div class="priceWrap mt-4 text-right">
@@ -161,7 +161,7 @@
 			var cartList = {};
 			var totalAmount = 0;
 
-			if (!number || number === 0) {
+			if (!number || number === '0') {
 				alert('수량이 0입니다! 확인하세요!!');
 				$('#CountBox').focus();
 				return false;
