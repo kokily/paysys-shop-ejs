@@ -13,69 +13,81 @@
 			<div class="col-sm-6">
 				<div class="image-box style-2 mb-20 bordered dark-bg text-center">
 					<div class="body">
-						<table class="table table-hover table-colored text-center">
-							<tr>
-								<th>분류</th>
-								<td><%= product.division %></td>
-							</tr>
-							<tr>
-								<th>단가</th>
-								<%
-									function comma(num) {
-              			return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-									}
-									
-            			var newprice = comma(product.price);
-								%>
-								<td><%= newprice %></td>
-							</tr>
-							<tr>
-								<th>단위</th>
-								<td><%= product.unit %></td>
-							</tr>
-						</table>
+						<form action="" method="post" id="cartForm">
+							<table class="table table-hover table-colored text-center">
+								<colgroup>
+									<col style="width: 50%;" />
+									<col style="width: 50%;" />
+								</colgroup>
+								<tr>
+									<th>분류</th>
+									<td><%= product.division %></td>
+								</tr>
+								<tr>
+									<th style="vertical-align: middle;">단가</th>
+									<% if (product.productName === '한정식') { %>
+										<td>
+											<input type="number" class="form-control" name="priceHan" id="priceHan"
+												value="<%= product.price %>" style="text-align: right;"
+											/>
+										</td>
+									<% } else { %>
+									<%
+										function comma(num) {
+											return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+										}
+										
+										var newprice = comma(product.price);
+									%>
+									<td><%= newprice %></td>
+									<% } %>
 
+								</tr>
+								<tr>
+									<th>단위</th>
+									<td><%= product.unit %></td>
+								</tr>
+							</table>
 						<hr />
 
-						<form action="" method="post" id="cartForm">
-							<input type="hidden" name="price" value="<%= product.price %>" />
-							<input type="hidden" name="number" value="1" />
-							<input type="hidden" name="amount" value="<%= product.price %>" />
+						<input type="hidden" name="price" value="<%= product.price %>" />
+						<input type="hidden" name="number" value="1" />
+						<input type="hidden" name="amount" value="<%= product.price %>" />
 
-							<div>
-								<div class="printNum" style="display: flex; font-size: 1rem;">
-									<label for="CountBox" class="form-control">수량</label>
-									<input type="number" class="form-control" id="CountBox"
-										style="display: inline-block; margin-left: 1rem;" />
-								</div>
-								
-								<div class="priceWrap mt-4 text-right">
-									<h2>
-										합계 금액 : 
-										<span id="priceHtml" style="color: white;">
-											<%
-												function comma(num) {
-                    			return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                  			}
-
-                  			var new2price = comma(product.price);
-											%>
-											<%= new2price %> 원
-										</span>
-									</h2>
-								</div>
-								<div style="clear: both;"></div>
+						<div>
+							<div class="printNum" style="display: flex; font-size: 1rem;">
+								<label for="CountBox" class="form-control">수량</label>
+								<input type="number" class="form-control" id="CountBox"
+									style="display: inline-block; margin-left: 1rem;" />
 							</div>
+							
+							<div class="priceWrap mt-4 text-right">
+								<h2>
+									합계 금액 : 
+									<span id="priceHtml" style="color: white;">
+										<%
+											function comma(num) {
+												return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+											}
 
-							<a href="javascript:history.back()"
-								class="btn btn-group btn-lg btn-warning btn-animated"
-							>
-								목록으로 <i class="fa fa-clipboard"></i>
-							</a>
-							<button class="btn btn-group btn-lg btn-success btn-animated ml-2">
-								전표추가 <i class="fa fa-location-arrow"></i>
-							</button>
-						</form>
+											var new2price = comma(product.price);
+										%>
+										<%= new2price %> 원
+									</span>
+								</h2>
+							</div>
+							<div style="clear: both;"></div>
+						</div>
+
+						<a href="javascript:history.back()"
+							class="btn btn-group btn-lg btn-warning btn-animated"
+						>
+							목록으로 <i class="fa fa-clipboard"></i>
+						</a>
+						<button class="btn btn-group btn-lg btn-success btn-animated ml-2">
+							전표추가 <i class="fa fa-location-arrow"></i>
+						</button>
+					</form>
 
 					</div>
 				</div>
@@ -96,7 +108,16 @@
 				$('#CountBox').val(cnt);
 			}
 
-			var price = $('#cartForm input[name=price]').val();
+			var price = 0;
+			var $productName = "<%= product.productName %>";
+			var $priceHan = $('#cartForm input[name=priceHan]');
+
+			if ($productName === '한정식') {
+				price = $priceHan.val();
+			} else {
+				price = $('#cartForm input[name=price]').val();
+			}
+
 			var cartNum = cnt;
 
 			function comma(num) {
@@ -111,16 +132,40 @@
 
 	$('#cartForm').submit(function () {
 		if (confirm('전표에 추가하시겠습니까??')) {
+			// 단가 미 입력 시 (한정식)
+			var $productName = "<%= product.productName %>";
+			var $priceHan = $('#cartForm input[name=priceHan]');
+			var price = 0;
+
+			console.log($priceHan.val());
+
+			if ($productName === '한정식') {
+				if (!$priceHan.val() || $priceHan.val() == 0) {
+					alert('한정식 단가를 입력하세요!!');
+					$priceHan.focus();
+					return false;
+				}
+
+				price = $priceHan.val();
+			} else {
+				price = "<%= product.price %>";
+			}
+
 			var productId = <%= product.id %>;
 			var native = "<%= product.native %>";
 			var productName = "<%= product.productName %>";
-			var price = "<%= product.price %>";
 
 			var number = $('#CountBox').val();
 			var amount = $('input[name=amount]').val();
 
 			var cartList = {};
 			var totalAmount = 0;
+
+			if (!number || number === 0) {
+				alert('수량이 0입니다! 확인하세요!!');
+				$('#CountBox').focus();
+				return false;
+			}
 
 			if (getCookie('cartList')) {
 				cartList = JSON.parse(getCookie('cartList'));
