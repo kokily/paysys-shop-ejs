@@ -11,6 +11,7 @@ import flash from 'connect-flash';
 import passport from 'passport';
 import session from 'express-session';
 import connectMongo from 'connect-mongo';
+import helmet from 'helmet';
 
 const app = express();
 const MongoStore = connectMongo(session);
@@ -22,6 +23,9 @@ mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true })
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+
+app.use(helmet());
+app.disable('x-powered-by');
 
 app
 .use(express.static(__dirname + '/public'))
