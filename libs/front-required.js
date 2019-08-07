@@ -8,7 +8,11 @@ export default (req, res, next) => {
       req.user.username === '이준호' ||
       req.user.username === '마혜진' ||
       req.user.username === '최보람' ||
-      req.user.username === '김대호'
+      req.user.username === '김대호' ||
+      req.user.username === '정용태' ||
+      req.user.username === '박지훈' ||
+      req.user.username === '박찬현' ||
+      req.user.username === '박원빈'
     ) {
       return next();
     } else {

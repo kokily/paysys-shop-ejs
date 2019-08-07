@@ -59,6 +59,7 @@ api.post('/login', passport.authenticate('local', {
   res.redirect('/');
 });
 
+/*
 // 사원 등록 (GET) '/auth/register'
 api.get('/register', (req, res) => {
   res.render('auth/register', {
@@ -80,6 +81,7 @@ api.post('/register', (req, res) => {
     })
     .catch(err => console.error(err.stack));
 });
+*/
 
 // 로그아웃 처리 (GET) '/auth/logout
 api.get('/logout', (req, res) => {

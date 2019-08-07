@@ -6,7 +6,8 @@ export default (req, res, next) => {
       req.user.username === '김현성' ||
       req.user.username === '이준호' ||
       req.user.username === '마혜진' ||
-      req.user.username === '최보람'
+      req.user.username === '최보람' ||
+      req.user.username === '박원빈'
     ) {
       return next();
     } else {
