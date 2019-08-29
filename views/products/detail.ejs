@@ -25,7 +25,7 @@
 								</tr>
 								<tr>
 									<th style="vertical-align: middle;">단가</th>
-									<% if (product.productName === '한정식') { %>
+									<% if (product.productName === '한정식' || product.productName === '음식 반입료') { %>
 										<td>
 											<input type="number" class="form-control" name="priceHan" id="priceHan"
 												value="<%= product.price %>" style="text-align: right;"
@@ -112,7 +112,7 @@
 			var $productName = "<%= product.productName %>";
 			var $priceHan = $('#cartForm input[name=priceHan]');
 
-			if ($productName === '한정식') {
+			if ($productName === '한정식' || $productName === '음식 반입료') {
 				price = $priceHan.val();
 			} else {
 				price = $('#cartForm input[name=price]').val();
@@ -139,9 +139,9 @@
 
 			console.log($priceHan.val());
 
-			if ($productName === '한정식') {
+			if ($productName === '한정식' || $productName === '음식 반입료') {
 				if (!$priceHan.val() || $priceHan.val() == 0) {
-					alert('한정식 단가를 입력하세요!!');
+					alert('단가를 입력하세요!!');
 					$priceHan.focus();
 					return false;
 				}
