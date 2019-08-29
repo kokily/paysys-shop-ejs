@@ -17,7 +17,10 @@ const app = express();
 const MongoStore = connectMongo(session);
 
 mongoose.Promise = global.Promise;
-mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true })
+mongoose.connect(process.env.MONGO_URI, {
+  useNewUrlParser: true,
+  useFindAndModify: true
+})
 .then(() => console.log('MongoDB Connected!!'))
 .catch((err) => console.error(err.stack));
 
@@ -56,6 +59,7 @@ app
 app.use(function(req, res, next) {
   app.locals.isLogin = req.isAuthenticated();
   app.locals.userData = req.user;
+  app.locals.userAgent = req.header('User-Agent');
   next();
 });
 
