@@ -1,5 +1,10 @@
 <% include ../partials/header %>
 
+<%
+	var filter = "win16|win32|win64|mac";
+	var isPC = userAgent.toLowerCase().match(filter);
+%>
+
 <div id="page-start"></div>
 
 <section class="main-container" style="margin-top: 60px;">
@@ -10,7 +15,8 @@
 	<div class="row justify-content-center">
 		<div class="col-10">
 
-
+			<% if (isPC) { %>
+				<!-- PC로 접속 시 -->
 				<table class="table table-hover table-colored text-center">
 					<tr>
 						<th>적용</th>
@@ -57,7 +63,65 @@
 						</tr>
 					<% } %>
 				</table>
-
+			<% } else { %>
+				<!-- Mobile로 접속 시-->
+				<div class="image-box team-member style-2 hc-shadow-2 bordered mb-20 text-center">
+					<div class="body">
+						<table class="table table-hover table-colored text-center">
+							<% if (Object.keys(cartList).length) { %>
+								<% for (let key in cartList) { %>
+									<tr>
+										<th>적 용</th>
+										<td><%= cartList[key].native %></td>
+									</tr>
+									<tr>
+										<th>상품명</th>
+										<td><%= cartList[key].productName %></td>
+									</tr>
+									<tr>
+										<th>단 가</th>
+										<td>
+											<% function comma (num) {
+												return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+											}
+											var newprice = comma(cartList[key].price);
+											%>
+											<%= newprice %> 원
+										</td>
+									</tr>
+									<tr>
+										<th>수 량</th>
+										<td><%= cartList[key].number %></td>
+									</tr>
+									<tr style="font-weight: 600; color: blue;">
+										<th>총가격</th>
+										<td>
+											<% function comma (num) {
+													return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+												}
+												var newamount = comma(cartList[key].amount);
+											%>
+											<%= newamount %> 원
+										</td>
+									</tr>
+									<tr style="color: red">
+										<td style="vertical-align: middle;">삭 제</td>
+										<td>
+											<a href="#" class="deleteCart btn btn-sm btn-danger btn-group btn-animated"
+												productId="<%= key %>"
+											>
+												삭제 <i class="fa fa-ban"></i>
+											</a>
+										</td>
+									</tr>
+								<% } %>
+							<% } else { %>
+								빌지 항목이 없습니다.
+							<% } %>
+						</table>
+					</div>
+				</div>
+			<% } %>
 			
 			<div class="text-right">
 				결제금액 : 
@@ -155,6 +219,21 @@
 
 		$('#trans').click(function () {
 			if (confirm('전표를 전송하시겠습니까??')) {
+				var username = $('#username').val();
+				var title = $('#title').val();
+				var hall = $('#hall').val();
+
+				$.ajax({
+					url: 'https://paysys.shop/smstransfer',
+					type: 'POST',
+					data: {
+						username: username,
+						title: title,
+						hall: hall
+					}
+				}).then(r => console.log('문자전송'))
+				.catch(e => console.log(e));
+
 				var msg = '전표가 전송되었습니다. 프런트 확인 요망'
 				socket.emit("trans", msg);
 			}

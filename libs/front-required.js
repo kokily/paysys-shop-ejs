@@ -12,7 +12,7 @@ export default (req, res, next) => {
       req.user.username === '정용태' ||
       req.user.username === '박지훈' ||
       req.user.username === '박찬현' ||
-      req.user.username === '박원빈'
+      req.user.username === '김용일'
     ) {
       return next();
     } else {

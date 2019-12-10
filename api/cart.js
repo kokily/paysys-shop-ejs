@@ -1,9 +1,10 @@
 import express from 'express';
+import loginRequired from '../libs/login-required';
 
 const api = express.Router();
 
 // 카트 (GET) '/cart'
-api.get('/', (req, res) => {
+api.get('/', loginRequired, (req, res) => {
 	var totalAmount = 0;
 	var cartList = {};
 

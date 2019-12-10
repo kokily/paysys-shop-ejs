@@ -6,6 +6,7 @@
   "author": "kokily <kokily@naver.com>",
   "license": "MIT",
   "dependencies": {
+    "aligoapi": "^1.0.7",
     "body-parser": "^1.19.0",
     "co": "^4.6.0",
     "connect-flash": "^0.1.1",

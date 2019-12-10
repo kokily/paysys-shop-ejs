@@ -1,3 +1,5 @@
 .env
 yarn.lock
 /node_modules/
+sms_config.js
+nginx_signing.key
